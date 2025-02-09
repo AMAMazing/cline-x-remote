@@ -1,0 +1,7 @@
+flask
+pywintypes
+pillow
+requests
+pyngrok
+talktollm
+win32clipboard
