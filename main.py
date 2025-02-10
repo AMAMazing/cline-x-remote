@@ -178,7 +178,7 @@ def handle_llm_interaction(prompt):
         prompt
     ])
 
-    return talkto("gemini", full_prompt, image_list)
+    return talkto("gemini", full_prompt, image_list,tabswitch=False)
 
 @app.route('/', methods=['GET'])
 @require_api_key
