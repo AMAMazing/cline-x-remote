@@ -1,0 +1,7 @@
+# Virtual Environment
+.venv/
+
+# PyInstaller files
+build/
+dist/
+*.spec
