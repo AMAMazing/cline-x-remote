@@ -1,52 +1,61 @@
-# Cline x (Remote)
+# Cline-X (Remote)
 
 This project provides a simple Flask API that acts as a bridge to interact with an LLM (Language Learning Model). It uses ngrok to expose the API publicly, allowing access from any network.
 
-## Prerequisites
+## How to Use
 
-1.  **Python:** Make sure you have Python installed on your system.
-2.  **pip:** You'll need pip, the Python package installer.
-3.  **ngrok:** Download and install ngrok from [https://ngrok.com/download](https://ngrok.com/download).
-4. **Connect your ngrok account.** Go to your ngrok Dashboard and get your authtoken, then in your terminal, run:
-```
-ngrok authtoken YOUR_AUTHTOKEN
-```
-## Installation
+There are two methods to run this application. The recommended method is to use the pre-built executable from the GitHub Releases page.
 
-1.  **Clone the repository:**
- ```
- git clone https://github.com/AMAMazing/cline-x-remote
- cd cline-x-remote
- ```
-2. **Install dependencies:** You may need to add `sudo` before running `pip install` in some systems.
-```
-pip install -r requirements.txt
-```
-This installs Flask, pyngrok, and other required libraries. If you run into an error about requirements.txt not existing, install them manually by running:
-```
-pip install flask pyngrok pywin32 pillow requests
-```
-## Running the API
+### Method 1: Using the Executable (Recommended)
 
-1.  **Start the Flask server:**
-```
-python main.py
-```
-This will:
-    *   Start the Flask application on port 3001.
-    *   Start an ngrok tunnel to expose the local server.
-    *   Print the **Base URL** and **API Key** to the console.
+1.  **Download the Executable**: Go to the [**Releases**](https://github.com/AMAMazing/cline-x-remote/releases) page of this repository and download the `Cline-X-App.exe` file from the latest release.
+2.  **Run the Application**: Double-click the `Cline-X-App.exe` file to run it. A terminal window will open.
+3.  **Get Credentials**: The terminal will display the **Base URL** and **API Key**. You will need these to connect with Cline.
+4.  **Keep it Running**: Do not close the terminal window, as this will shut down the server.
 
-2. **Keep the terminal open.** The server needs to keep running to access the API.
+### Method 2: Running from Python Source
 
-## Accessing the API via Cline
+This method is for users who want to run the application from the source code.
 
-1.  **API Proviver & Model ID**
+#### Prerequisites
+
+1.  **Python**: Make sure you have Python installed on your system.
+2.  **pip**: You'll need pip, the Python package installer.
+3.  **ngrok**: Download and install ngrok from [https://ngrok.com/download](https://ngrok.com/download).
+4.  **Connect your ngrok account**: Go to your ngrok Dashboard and get your authtoken, then in your terminal, run:
+    ```
+    ngrok authtoken YOUR_AUTHTOKEN
+    ```
+
+#### Installation
+
+1.  **Clone the repository**:
+    ```
+    git clone https://github.com/AMAMazing/cline-x-remote
+    cd cline-x-remote
+    ```
+2.  **Install dependencies**:
+    ```
+    pip install -r requirements.txt
+    ```
+
+#### Running the API
+
+1.  **Start the Flask server**:
+    ```
+    python main.py
+    ```
+2.  **Get Credentials**: The terminal will display the **Base URL** and **API Key**.
+3.  **Keep the terminal open**: The server needs to keep running to access the API.
+
+### Connecting with Cline
+
+Once the server is running (using either method), follow these steps to connect it to the Cline VS Code extension:
+
+1.  **API Provider & Model ID**
     *   Go to the Cline settings in VS Code.
-    *   Set API Provider to **OpenAI Compatible**
-    *   Set Model ID to **gpt-3.5-turbo**
-2. **Base URL & API Key**
-    *   Set the "Base URL" to the ngrok-provided URL printed in the console when you start the server.
-    *   Set the "API Key" to the key printed in the console when you started the server.
-
-
+    *   Set **API Provider** to `OpenAI Compatible`.
+    *   Set **Model ID** to `gpt-3.5-turbo`.
+2.  **Base URL & API Key**
+    *   Set the **Base URL** to the ngrok-provided URL from the terminal.
+    *   Set the **API Key** to the key from the terminal.
