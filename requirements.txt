@@ -4,3 +4,6 @@ requests
 pyngrok
 talktollm
 pywin32
+python-dotenv
+pyinstaller
+pywin32-ctypes
