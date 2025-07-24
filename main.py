@@ -64,7 +64,7 @@ def set_clipboard(text, retries=3, delay=0.2):
             raise
     print(f"Failed to set clipboard after {retries} attempts.")
 
-def set_clipboard_image(image_data):    
+def set_clipboard_image(image_data):
     try:
         binary_data = base64.b64decode(image_data.split(',')[1])
         image = Image.open(io.BytesIO(binary_data))
@@ -101,9 +101,6 @@ def get_content_text(content: Union[str, List[Dict[str, str]], Dict[str, str]]) 
             if item.get("type") == "text":
                 parts.append(item["text"])
             elif item.get("type") == "image" and "image_url" in item:
-                image_data = item["image_url"].get("url", "")
-                if image_data.startswith('data:image'):
-                    set_clipboard_image(image_data)
                 description = item.get("description", "An uploaded image")
                 parts.append(f"[Image: {description}]")
         return "\\n".join(parts)
@@ -120,6 +117,8 @@ def handle_llm_interaction(prompt):
 
     request_json = request.get_json()
     image_list = []
+
+    # Extract image data from the request for talktollm
     if 'messages' in request_json:
         for message in request_json['messages']:
             content = message.get('content', [])
@@ -129,12 +128,13 @@ def handle_llm_interaction(prompt):
                         image_url = item.get('image_url', {}).get('url', '')
                         if image_url.startswith('data:image'):
                             image_list.append(image_url)
-                            item['image_url']['url'] = '[IMAGE DATA REMOVED]'
 
     current_time_str = time.strftime('%Y-%m-%d %H:%M:%S')
     headers_log = f"{current_time_str} - INFO - Request data: {request_json}"
     full_prompt = "\\n".join([headers_log, 'Please follow these rules...', prompt])
-    return talkto("gemini", full_prompt, image_list, tabswitch=False)
+    
+    # Pass the extracted image data to talkto
+    return talkto("gemini", full_prompt, imagedata=image_list, tabswitch=False)
 
 @app.route('/', methods=['GET'])
 @require_api_key

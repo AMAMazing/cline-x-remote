@@ -1,6 +1,6 @@
 [Setup]
 AppName=Cline-X App
-AppVersion=1.0
+AppVersion=1.1
 DefaultDirName={autopf64}\\Cline-X App
 DefaultGroupName=Cline-X App
 OutputBaseFilename=cline-x-setup
