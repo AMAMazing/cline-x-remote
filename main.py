@@ -133,7 +133,11 @@ def handle_llm_interaction(prompt):
                         if image_url.startswith('data:image'):
                             image_list.append(image_url)
     
-    return talkto(current_model, prompt, imagedata=image_list)
+    current_time_str = time.strftime('%Y-%m-%d %H:%M:%S')
+    headers_log = f"{current_time_str} - INFO - Request data: {request_json}"
+    full_prompt = "\\n".join([headers_log, 'Please follow these rules...', prompt])
+    
+    return talkto(current_model, full_prompt, imagedata=image_list)
 
 # --- FLASK ROUTES ---
 @app.route('/', methods=['GET'])
